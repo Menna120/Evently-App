@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#FFFFFF</color>
+    <color name="light_blue">#F2FEFF</color>
+    <color name="purple">#5669FF</color>
+    <color name="black">#1C1C1C</color>
+    <color name="navy_blue">#051725</color>
+    <color name="off_white">#F4EBDC</color>
+</resources>

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Evently</string>
+    <string name="home">Home</string>
+    <string name="love">Love</string>
+    <string name="profile">Profile</string>
+    <string name="map">Map</string>
+    <string name="add_event">Add Event</string>
+</resources>
