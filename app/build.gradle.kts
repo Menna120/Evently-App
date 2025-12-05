@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -45,9 +46,13 @@ android {
 }
 
 dependencies {
+    // Core Android
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.core.splashscreen)
+
+    // Compose
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
@@ -56,17 +61,35 @@ dependencies {
 
     // Navigation
     implementation(libs.androidx.navigation.compose)
-
-    // SplashScreen
-    implementation(libs.androidx.core.splashscreen)
-
-    // JSON serialization
     implementation(libs.kotlinx.serialization.json)
 
-    implementation(project(":domain"))
-    implementation(project(":data"))
+    // Koin - DI
+    implementation(platform(libs.koin.bom))
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
+    implementation(libs.koin.compose.navigation)
 
+    // Koin Annotations
+    implementation(libs.koin.annotations)
+    ksp(libs.koin.ksp.compiler)
+
+    // Project Modules
+    implementation(project(":core:designsystem"))
+    implementation(project(":core:data"))
+    implementation(project(":core:model"))
+
+    // Feature Modules
+    implementation(project(":feature:onboarding"))
+    implementation(project(":feature:auth"))
+    implementation(project(":feature:home"))
+    implementation(project(":feature:map"))
+    implementation(project(":feature:event"))
+    implementation(project(":feature:profile"))
+    implementation(project(":feature:favorites"))
+
+    // Testing
     testImplementation(libs.junit)
+    testImplementation(libs.koin.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

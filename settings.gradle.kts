@@ -21,5 +21,16 @@ dependencyResolutionManagement {
 
 rootProject.name = "Evently"
 include(":app")
-include(":data")
-include(":domain")
+include(":core:data")
+include(":core:model")
+include(":core:network")
+include(":core:database")
+include(":core:datastore")
+include(":core:designsystem")
+include(":feature:onboarding")
+include(":feature:auth")
+include(":feature:home")
+include(":feature:map")
+include(":feature:favorites")
+include(":feature:profile")
+include(":feature:event")

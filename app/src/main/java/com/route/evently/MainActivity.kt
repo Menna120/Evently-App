@@ -9,8 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.route.evently.navigation.EventlyNavGraph
-import com.route.evently.ui.theme.EventlyTheme
+import com.route.designsystem.theme.EventlyTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
