@@ -47,9 +47,8 @@ androidx-navigation-compose = { module = "androidx.navigation:navigation-compose
 
 # --- Koin (Dependency Injection) ---
 koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin" }
-koin-android = { group = "io.insert-koin", name = "koin-android" }
-koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose" }
-koin-compose-navigation = { module = "io.insert-koin:koin-androidx-compose-navigation" }
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
+koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
 
 # --- Koin Annotations ---
 koin-annotations = { group = "io.insert-koin", name = "koin-annotations", version.ref = "koinAnnotations" }

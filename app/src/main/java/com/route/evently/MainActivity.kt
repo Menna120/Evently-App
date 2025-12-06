@@ -10,6 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.route.designsystem.theme.EventlyTheme
+import com.route.evently.navigation.EventlyApp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +20,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             EventlyTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    EventlyNavGraph(modifier = Modifier.padding(innerPadding))
+                    EventlyApp(modifier = Modifier.padding(innerPadding))
                 }
             }
         }

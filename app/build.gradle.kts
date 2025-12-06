@@ -43,6 +43,9 @@ android {
     buildFeatures {
         compose = true
     }
+    sourceSets.getByName("main") {
+        java.srcDir("build/generated/ksp/main/kotlin")
+    }
 }
 
 dependencies {
@@ -67,7 +70,6 @@ dependencies {
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
-    implementation(libs.koin.compose.navigation)
 
     // Koin Annotations
     implementation(libs.koin.annotations)

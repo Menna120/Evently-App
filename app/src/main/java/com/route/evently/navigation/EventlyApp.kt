@@ -1,4 +1,4 @@
-package com.route.evently
+package com.route.evently.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -13,7 +13,7 @@ import com.route.designsystem.utils.LocalRootNavController
 import com.route.onboarding.navigation.onboardingGraph
 
 @Composable
-fun EventlyNavGraph(modifier: Modifier = Modifier) {
+fun EventlyApp(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
     CompositionLocalProvider(LocalRootNavController provides navController) {
         NavHost(

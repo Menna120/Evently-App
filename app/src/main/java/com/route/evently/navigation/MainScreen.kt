@@ -1,4 +1,4 @@
-package com.route.evently
+package com.route.evently.navigation
 
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -42,7 +42,7 @@ fun MainScreen() {
                 val currentDestination = navBackStackEntry?.destination
                 EventlyBottomNavBar(
                     isSelected = { destination ->
-                        currentDestination?.hierarchy?.any { it.route == destination::class.simpleName } == true
+                        currentDestination?.hierarchy?.any { it.route == destination::class.qualifiedName } == true
                     },
                     onItemClick = { destination ->
                         navController.navigate(destination) {

@@ -1,5 +1,6 @@
 package com.route.designsystem.composables
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,7 +14,9 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
@@ -54,6 +57,7 @@ fun EventlyBottomNavBar(
                     Spacer(modifier = Modifier.weight(1f))
                 } else {
                     val selected = isSelected(destination)
+                    val scale by animateFloatAsState(targetValue = if (selected) 1.3f else 1f)
                     val iconId =
                         if (selected) destination.selectedIconId else destination.unselectedIconId
 
@@ -64,7 +68,8 @@ fun EventlyBottomNavBar(
                         icon = {
                             Icon(
                                 imageVector = ImageVector.vectorResource(id = iconId),
-                                contentDescription = stringResource(id = destination.labelId)
+                                contentDescription = stringResource(id = destination.labelId),
+                                modifier = Modifier.scale(scale)
                             )
                         },
                         label = { Text(text = stringResource(id = destination.labelId)) },

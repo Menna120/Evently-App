@@ -36,6 +36,9 @@ android {
             jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
         }
     }
+    sourceSets.getByName("main") {
+        java.srcDir("build/generated/ksp/main/kotlin")
+    }
 }
 
 dependencies {
@@ -57,6 +60,7 @@ dependencies {
 
     // Koin
     implementation(platform(libs.koin.bom))
+    implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
     implementation(libs.koin.annotations)
     ksp(libs.koin.ksp.compiler)

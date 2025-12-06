@@ -35,6 +35,9 @@ android {
             jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
         }
     }
+    sourceSets.getByName("main") {
+        java.srcDir("build/generated/ksp/main/kotlin")
+    }
 }
 
 dependencies {

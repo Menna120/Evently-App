@@ -12,11 +12,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.route.designsystem.navigation.Evently
+import com.route.designsystem.utils.LocalRootNavController
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun LoginScreen(viewModel: LoginViewModel = koinViewModel()) {
     val uiState by viewModel.uiState.collectAsState()
+    val navController = LocalRootNavController.current
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -28,7 +31,7 @@ fun LoginScreen(viewModel: LoginViewModel = koinViewModel()) {
         } else {
             TextField(value = "", onValueChange = {}, placeholder = { Text("Email") })
             TextField(value = "", onValueChange = {}, placeholder = { Text("Password") })
-            Button(onClick = { /*TODO*/ }) {
+            Button(onClick = { navController.navigate(Evently) }) {
                 Text("Login")
             }
         }
