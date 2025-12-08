@@ -46,17 +46,15 @@ dependencies {
     // Coroutines
     implementation(libs.androidx.core.ktx)
 
-    // Networking (Ktor)
-    implementation(libs.ktor.client.core)
-    implementation(libs.ktor.client.okhttp)
-    implementation(libs.ktor.client.content.negotiation)
-    implementation(libs.ktor.serialization.kotlinx.json)
-    implementation(libs.kotlinx.serialization.json)
-
     // Firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
+
+    // Google Play Services
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
 
     // Koin (Annotations support)
     implementation(platform(libs.koin.bom))

@@ -1,13 +1,13 @@
 package com.route.evently.di
 
-import com.route.auth.AuthModule
-import com.route.data.DataModule
-import com.route.event.EventModule
-import com.route.favorites.FavoritesModule
-import com.route.home.HomeModule
-import com.route.map.MapModule
-import com.route.onboarding.OnboardingModule
-import com.route.profile.ProfileModule
+import com.route.auth.di.AuthModule
+import com.route.data.di.DataModule
+import com.route.event.di.EventModule
+import com.route.favorites.di.FavoritesModule
+import com.route.home.di.HomeModule
+import com.route.map.di.MapModule
+import com.route.onboarding.di.OnboardingModule
+import com.route.profile.di.ProfileModule
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
 

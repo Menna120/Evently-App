@@ -27,10 +27,10 @@ import com.route.designsystem.theme.EventlyTheme
 import com.route.designsystem.utils.LocalMainNavController
 import com.route.event.event_details.EventDetailsScreen
 import com.route.event.event_form.EventFormScreen
-import com.route.favorites.FavoriteScreen
-import com.route.home.HomeScreen
-import com.route.map.MapScreen
-import com.route.profile.ProfileScreen
+import com.route.favorites.ui.FavoriteScreen
+import com.route.home.ui.HomeScreen
+import com.route.map.ui.MapScreen
+import com.route.profile.ui.ProfileScreen
 
 @Composable
 fun MainScreen() {

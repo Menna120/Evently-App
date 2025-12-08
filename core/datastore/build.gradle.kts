@@ -1,4 +1,5 @@
 plugins {
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
@@ -47,6 +48,7 @@ dependencies {
 
     // DataStore
     implementation(libs.androidx.datastore.preferences)
+    implementation(libs.kotlinx.serialization.json)
 
     // Koin (Annotations support)
     implementation(platform(libs.koin.bom))

@@ -44,9 +44,13 @@ dependencies {
 
     // Koin (Annotations support)
     implementation(platform(libs.koin.bom))
-    implementation(libs.koin.android)
     implementation(libs.koin.annotations)
+    implementation(libs.koin.android)
     ksp(libs.koin.ksp.compiler)
+
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
 
     // Testing
     testImplementation(libs.junit)

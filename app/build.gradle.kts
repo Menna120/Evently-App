@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.android.application)
+    alias(libs.plugins.google.services)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
@@ -46,6 +47,9 @@ android {
     sourceSets.getByName("main") {
         java.srcDir("build/generated/ksp/main/kotlin")
     }
+    androidResources {
+        generateLocaleConfig = true
+    }
 }
 
 dependencies {
@@ -54,6 +58,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.splashscreen)
+    implementation(libs.androidx.appcompat)
 
     // Compose
     implementation(platform(libs.androidx.compose.bom))
@@ -74,6 +79,15 @@ dependencies {
     // Koin Annotations
     implementation(libs.koin.annotations)
     ksp(libs.koin.ksp.compiler)
+
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
+
+    // Google Play Services
+    implementation(libs.googleid)
+    implementation(libs.androidx.credentials)
+    implementation(libs.play.services.auth)
 
     // Project Modules
     implementation(project(":core:designsystem"))
