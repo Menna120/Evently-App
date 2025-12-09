@@ -8,8 +8,8 @@ fun Event.toEntity() = EventEntity(
     title = title,
     description = description,
     type = type,
-    date = date,
+    timestamp = timestamp,
     latitude = location.latitude,
     longitude = location.longitude,
-    isFavorite = isFavorite
+    favorite = favorite
 )

@@ -2,14 +2,19 @@ package com.route.profile.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.route.data.AuthManager
 import com.route.data.SettingsManager
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
-class ProfileViewModel(private val settingsManager: SettingsManager) : ViewModel() {
+class ProfileViewModel(
+    private val authManager: AuthManager,
+    private val settingsManager: SettingsManager
+) : ViewModel() {
     val darkTheme: StateFlow<Boolean?> = settingsManager.darkTheme.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Eagerly,
@@ -27,5 +32,11 @@ class ProfileViewModel(private val settingsManager: SettingsManager) : ViewModel
 
     fun onLanguageChanged(isArabic: Boolean) {
         settingsManager.setLanguage(if (isArabic) "ar" else "en")
+    }
+
+    fun signOut() {
+        viewModelScope.launch {
+            authManager.signOut()
+        }
     }
 }

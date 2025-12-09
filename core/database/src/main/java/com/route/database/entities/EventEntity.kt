@@ -4,7 +4,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.route.model.Event
 import com.route.model.Location
-import java.util.Date
 
 @Entity(tableName = "events")
 data class EventEntity(
@@ -13,18 +12,18 @@ data class EventEntity(
     val title: String,
     val description: String,
     val type: String,
-    val date: Date,
+    val timestamp: Long,
     val latitude: Double,
     val longitude: Double,
-    val isFavorite: Boolean
+    val favorite: Boolean
 ) {
     fun toEvent(): Event = Event(
         id = id,
         title = title,
         description = description,
         type = type,
-        date = date,
+        timestamp = timestamp,
         location = Location(latitude, longitude),
-        isFavorite = isFavorite
+        favorite = favorite
     )
 }

@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.android.library)
@@ -11,11 +13,27 @@ android {
         version = release(36)
     }
 
+    val localProperties = Properties()
+    val localPropertiesFile = rootProject.file("local.properties")
+    if (localPropertiesFile.exists()) {
+        localProperties.load(localPropertiesFile.inputStream())
+    }
+
+    val webClientId = localProperties.getProperty("WEB_CLIENT_ID") ?: ""
+
     defaultConfig {
         minSdk = 27
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "WEB_CLIENT_ID", "\"$webClientId\"")
+
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+
 
     buildTypes {
         release {
@@ -52,8 +70,8 @@ dependencies {
     implementation(libs.firebase.firestore)
 
     // Google Play Services
-    implementation(libs.androidx.credentials)
     implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.androidx.credentials)
     implementation(libs.googleid)
 
     // Koin (Annotations support)

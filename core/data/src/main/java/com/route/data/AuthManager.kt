@@ -1,20 +1,26 @@
 package com.route.data
 
+import android.content.Context
+import com.route.model.Result
+import com.route.model.User
 import com.route.network.AuthRemoteRepo
+import kotlinx.coroutines.flow.Flow
 import org.koin.core.annotation.Single
 
 @Single
 class AuthManager(private val repo: AuthRemoteRepo) {
-    suspend fun signInWithCredential(idToken: String): String? =
-        repo.signInWithCredential(idToken)
+    fun signInWithGoogle(context: Context): Flow<Result<User>> =
+        repo.signInWithGoogle(context)
 
-    suspend fun signInWithEmailAndPassword(email: String, password: String): String? =
-        repo.signInWithEmailAndPassword(email, password)
+    fun signInWithEmail(email: String, password: String): Flow<Result<User>> =
+        repo.signInWithEmail(email, password)
 
-    suspend fun createUserWithEmailAndPassword(email: String, password: String): String? =
-        repo.createUserWithEmailAndPassword(email, password)
+    fun signUpWithEmail(email: String, password: String): Flow<Result<User>> =
+        repo.signUpWithEmail(email, password)
 
-    fun getToken(): String? = repo.getToken()
+    fun getAuthState(): Flow<User?> = repo.getAuthState()
 
-    fun signOut() = repo.signOut()
+    val currentUser: User? = repo.currentUser
+
+    suspend fun signOut() = repo.signOut()
 }

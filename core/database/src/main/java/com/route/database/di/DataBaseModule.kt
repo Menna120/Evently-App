@@ -3,10 +3,8 @@ package com.route.database.di
 import android.content.Context
 import androidx.room.Room
 import com.route.database.EventLocalRepo
-import com.route.database.UserLocalRepo
 import com.route.database.db.EventlyDatabase
 import com.route.database.repo.EventRoomRepo
-import com.route.database.repo.UserRoomRepo
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
@@ -22,11 +20,6 @@ class DataBaseModule {
             .build()
 
     @Single
-    fun provideEventLocalRepo(db: EventlyDatabase): EventLocalRepo =
-        EventRoomRepo(db.eventDao())
-
-    @Single
-    fun provideUserLocalRepo(db: EventlyDatabase): UserLocalRepo =
-        UserRoomRepo(db.userDao())
+    fun provideEventLocalRepo(db: EventlyDatabase): EventLocalRepo = EventRoomRepo(db.eventDao())
 
 }

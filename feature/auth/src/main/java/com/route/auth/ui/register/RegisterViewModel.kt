@@ -4,13 +4,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.route.data.AuthManager
 import com.route.data.SettingsManager
+import com.route.model.Result
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
@@ -43,24 +45,15 @@ class RegisterViewModel(
             _uiState.update { it.copy(error = "Passwords do not match") }
             return
         }
-        viewModelScope.launch {
-            _uiState.update { it.copy(isLoading = true) }
-            try {
-                authManager.createUserWithEmailAndPassword(
-                    _uiState.value.email,
-                    _uiState.value.password
-                )
-                _uiState.update { it.copy(isLoading = false, registerSuccess = true, error = null) }
-            } catch (e: Exception) {
-                _uiState.update {
-                    it.copy(
-                        isLoading = false,
-                        registerSuccess = false,
-                        error = e.message
-                    )
+        authManager.signUpWithEmail(_uiState.value.email, _uiState.value.password)
+            .onEach { result ->
+                _uiState.update { it.copy(isLoading = result is Result.Loading) }
+                when (result) {
+                    is Result.Error -> _uiState.update { it.copy(error = result.message) }
+                    Result.Loading -> Unit
+                    is Result.Success -> _uiState.update { it.copy(registerSuccess = true) }
                 }
-            }
-        }
+            }.launchIn(viewModelScope)
     }
 
     fun onLanguageChanged(isArabic: Boolean) {

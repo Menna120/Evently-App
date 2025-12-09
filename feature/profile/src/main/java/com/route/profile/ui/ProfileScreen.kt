@@ -15,13 +15,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.route.designsystem.navigation.Auth
 import com.route.designsystem.utils.LocalRootNavController
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ProfileScreen(viewModel: ProfileViewModel = koinViewModel()) {
-    val rootNavController = LocalRootNavController.current
+    LocalRootNavController.current
     val darkTheme by viewModel.darkTheme.collectAsState()
     val appLanguage by viewModel.appLanguage.collectAsState()
 
@@ -49,7 +48,7 @@ fun ProfileScreen(viewModel: ProfileViewModel = koinViewModel()) {
             )
         }
 
-        Button(onClick = { rootNavController.navigate(Auth) }) {
+        Button(onClick = { viewModel.signOut() }) {
             Text("Logout")
         }
     }

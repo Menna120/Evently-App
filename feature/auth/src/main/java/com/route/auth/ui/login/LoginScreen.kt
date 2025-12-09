@@ -1,7 +1,7 @@
 package com.route.auth.ui.login
 
-import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,18 +12,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.route.designsystem.navigation.Evently
 import com.route.designsystem.navigation.RegisterDestination
 import com.route.designsystem.utils.LocalRootNavController
 import org.koin.androidx.compose.koinViewModel
@@ -34,22 +34,17 @@ fun LoginScreen(viewModel: LoginViewModel = koinViewModel()) {
     val darkTheme by viewModel.darkTheme.collectAsState()
     val uiState by viewModel.uiState.collectAsState()
     val navController = LocalRootNavController.current
-    val activity = LocalActivity.current
+    val context = LocalContext.current
 
-    LaunchedEffect(uiState.loginSuccess) {
-        if (uiState.loginSuccess) {
-            navController.navigate(Evently)
-        }
-    }
-
-    Column(
+    Box(
         modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        contentAlignment = Alignment.Center
     ) {
-        if (uiState.isLoading) {
-            CircularProgressIndicator()
-        } else {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -92,16 +87,27 @@ fun LoginScreen(viewModel: LoginViewModel = koinViewModel()) {
                 Text("Login")
             }
             Spacer(modifier = Modifier.height(16.dp))
-            Button(onClick = { viewModel.signInWithGoogle(activity) }) {
+            Button(onClick = { viewModel.signInWithGoogle(context) }) {
                 Text("Sign in with Google")
             }
             Spacer(modifier = Modifier.height(16.dp))
             TextButton(onClick = { navController.navigate(RegisterDestination) }) {
                 Text("Don't have an account? Sign up")
             }
+            uiState.error?.let {
+                Text(text = it)
+            }
         }
-        uiState.error?.let {
-            Text(text = it)
+
+        if (uiState.isLoading) {
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = MaterialTheme.colorScheme.scrim.copy(alpha = 0.5f)
+            ) {
+                Box(contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator()
+                }
+            }
         }
     }
 }

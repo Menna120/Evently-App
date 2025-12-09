@@ -13,16 +13,19 @@ interface EventDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertEvent(event: EventEntity)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(events: List<EventEntity>)
+
     @Query("SELECT * FROM events")
     suspend fun getAllEvents(): List<EventEntity>
 
-    @Query("SELECT * FROM events WHERE isFavorite = 1")
+    @Query("SELECT * FROM events WHERE favorite = 1")
     suspend fun getFavoriteEvents(): List<EventEntity>
 
     @Query("SELECT * FROM events WHERE id= :id")
-    suspend fun getEvent(id: String): EventEntity?
+    suspend fun getEvent(id: String): EventEntity
 
-    @Query("SELECT * FROM events WHERE isFavorite = 1 AND (title LIKE '%' || :query || '%' OR description LIKE '%' || :query || '%')")
+    @Query("SELECT * FROM events WHERE favorite = 1 AND (title LIKE '%' || :query || '%' OR description LIKE '%' || :query || '%')")
     suspend fun searchEvents(query: String): List<EventEntity>
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
