@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">Evently</string>
-    <string name="home">الرئيسية</string>
-    <string name="love">المفضلة</string>
-    <string name="profile">الملف الشخصي</string>
-    <string name="map">الخريطة</string>
-    <string name="add_event">إضافة حدث</string>
-</resources>

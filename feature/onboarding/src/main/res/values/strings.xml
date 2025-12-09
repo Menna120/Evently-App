@@ -2,4 +2,16 @@
 <resources>
     <string name="language">Language</string>
     <string name="go_to_auth_screen">Go to Auth Screen</string>
+    <string name="onboarding_welcome_title">Personalize Your Experience</string>
+    <string name="onboarding_discover_title">Find Events That Inspire You</string>
+    <string name="onboarding_connect_title"><![CDATA[Connect & Share Moments]]></string>
+    <string name="onboarding_welcome_description">Choose your preferred theme and language to get started with a comfortable, tailored experience that suits your style.</string>
+    <string name="onboarding_discover_description">Dive into a world of events crafted to fit your unique interests. Whether you\'re into live music, art workshops, professional networking, or simply discovering new experiences, we have something for everyone. Our curated recommendations will help you explore, connect, and make the most of every opportunity around you.</string>
+    <string name="onboarding_connect_description">Share your journey with friends and find people with similar passions. See what events your connections are attending and join the community. Evently is better together!</string>
+    <string name="onboarding_plan_title">Find Events That Inspire You</string>
+    <string name="onboarding_plan_description">Dive into a world of events crafted to fit your unique interests. Whether you\'re into live music, art workshops, professional networking, or simply discovering new experiences, we have something for everyone. Our curated recommendations will help you explore, connect, and make the most of every opportunity around you.</string>
+    <string name="let_s_start">Let’s Start</string>
+    <string name="theme">Theme</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
 </resources>

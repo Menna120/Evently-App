@@ -23,5 +23,5 @@ import org.koin.core.annotation.Module
         EventModule::class
     ]
 )
-@ComponentScan
+@ComponentScan("com.route.evently")
 class AppKoinModule

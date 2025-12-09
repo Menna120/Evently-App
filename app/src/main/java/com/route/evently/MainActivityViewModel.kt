@@ -1,4 +1,4 @@
-package com.route.home.ui
+package com.route.evently
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,7 +9,14 @@ import kotlinx.coroutines.flow.stateIn
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
-class HomeViewModel(private val settingsManager: SettingsManager) : ViewModel() {
+class MainActivityViewModel(settingsManager: SettingsManager) : ViewModel() {
+
+    val showOnboarding: StateFlow<Boolean?> = settingsManager.showOnboarding.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.Eagerly,
+        initialValue = null
+    )
+
     val darkTheme: StateFlow<Boolean?> = settingsManager.darkTheme.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Eagerly,
@@ -20,12 +27,4 @@ class HomeViewModel(private val settingsManager: SettingsManager) : ViewModel() 
         started = SharingStarted.Eagerly,
         initialValue = null
     )
-
-    fun onThemeChanged(isDark: Boolean) {
-        settingsManager.setTheme(isDark)
-    }
-
-    fun onLanguageChanged(isArabic: Boolean) {
-        settingsManager.setLanguage(if (isArabic) "ar" else "en")
-    }
 }

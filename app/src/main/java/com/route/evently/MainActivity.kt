@@ -12,34 +12,51 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.os.LocaleListCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.route.data.SettingsManager
 import com.route.designsystem.theme.EventlyTheme
 import com.route.evently.navigation.EventlyApp
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private val settingsManager: SettingsManager by inject()
+    private val viewModel: MainActivityViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        var keepSplashOn by mutableStateOf(true)
+        val splashScreen = installSplashScreen()
+        splashScreen.setKeepOnScreenCondition { keepSplashOn }
+
         super.onCreate(savedInstanceState)
-        installSplashScreen()
         enableEdgeToEdge()
         setContent {
-            val darkTheme by settingsManager.darkTheme.collectAsState()
-            val appLanguage by settingsManager.appLanguage.collectAsState()
+            val darkTheme by viewModel.darkTheme.collectAsState()
+            val appLanguage by viewModel.appLanguage.collectAsState()
+            val showOnboarding by viewModel.showOnboarding.collectAsState()
 
-            LaunchedEffect(appLanguage) {
-                val localeList = LocaleListCompat.forLanguageTags(appLanguage)
-                AppCompatDelegate.setApplicationLocales(localeList)
+            LaunchedEffect(darkTheme, appLanguage, showOnboarding) {
+                if (darkTheme != null && appLanguage != null && showOnboarding != null) {
+                    keepSplashOn = false
+                }
             }
 
-            EventlyTheme(darkTheme = darkTheme || isSystemInDarkTheme()) {
+            LaunchedEffect(appLanguage) {
+                appLanguage?.let {
+                    AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(it))
+                }
+            }
+
+            EventlyTheme(darkTheme = darkTheme == true || isSystemInDarkTheme()) {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    EventlyApp(modifier = Modifier.padding(innerPadding))
+                    showOnboarding?.let {
+                        EventlyApp(
+                            modifier = Modifier.padding(innerPadding),
+                            showOnboarding = it
+                        )
+                    }
                 }
             }
         }

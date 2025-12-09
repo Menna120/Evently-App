@@ -5,8 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.route.data.AuthManager
 import com.route.data.SettingsManager
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
@@ -18,8 +20,11 @@ class RegisterViewModel(
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(RegisterUiState())
     val uiState: StateFlow<RegisterUiState> = _uiState.asStateFlow()
-    val appLanguage: StateFlow<String> = settingsManager.appLanguage
-    val darkTheme: StateFlow<Boolean> = settingsManager.darkTheme
+    val appLanguage: StateFlow<String?> = settingsManager.appLanguage.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.Eagerly,
+        initialValue = null
+    )
 
     fun onEmailChange(email: String) {
         _uiState.update { it.copy(email = email) }
@@ -61,8 +66,6 @@ class RegisterViewModel(
     fun onLanguageChanged(isArabic: Boolean) {
         settingsManager.setLanguage(if (isArabic) "ar" else "en")
     }
-
-    fun onThemeChanged(isDark: Boolean) = settingsManager.setTheme(isDark)
 }
 
 data class RegisterUiState(

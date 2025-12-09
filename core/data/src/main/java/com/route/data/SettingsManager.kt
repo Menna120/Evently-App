@@ -4,9 +4,7 @@ import com.route.datastore.SettingsRepo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import org.koin.core.annotation.Single
 
@@ -15,19 +13,17 @@ class SettingsManager(private val settingsRepo: SettingsRepo) {
 
     private val settingsScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
-    val darkTheme: StateFlow<Boolean> = settingsRepo.darkTheme
-        .stateIn(
-            scope = settingsScope,
-            started = SharingStarted.Eagerly,
-            initialValue = false
-        )
+    val showOnboarding: Flow<Boolean> = settingsRepo.showOnboarding
 
-    val appLanguage: StateFlow<String> = settingsRepo.appLanguage
-        .stateIn(
-            scope = settingsScope,
-            started = SharingStarted.Eagerly,
-            initialValue = "en"
-        )
+    val darkTheme: Flow<Boolean> = settingsRepo.darkTheme
+
+    val appLanguage: Flow<String> = settingsRepo.appLanguage
+
+    fun setShowOnboarding(show: Boolean) {
+        settingsScope.launch {
+            settingsRepo.setShowOnboarding(show)
+        }
+    }
 
     fun setTheme(isDark: Boolean) {
         settingsScope.launch {

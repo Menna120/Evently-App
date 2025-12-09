@@ -7,21 +7,26 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.route.auth.navigation.authGraph
+import com.route.designsystem.navigation.Auth
 import com.route.designsystem.navigation.Evently
 import com.route.designsystem.navigation.Onboarding
 import com.route.designsystem.utils.LocalRootNavController
-import com.route.onboarding.navigation.onboardingGraph
+import com.route.onboarding.ui.OnboardingScreen
 
 @Composable
-fun EventlyApp(modifier: Modifier = Modifier) {
+fun EventlyApp(
+    modifier: Modifier = Modifier,
+    showOnboarding: Boolean
+) {
     val navController = rememberNavController()
+    val startDestination = if (showOnboarding) Onboarding else Auth
     CompositionLocalProvider(LocalRootNavController provides navController) {
         NavHost(
             navController = navController,
-            startDestination = Onboarding,
+            startDestination = startDestination,
             modifier = modifier
         ) {
-            onboardingGraph()
+            composable<Onboarding> { OnboardingScreen() }
             authGraph()
             composable<Evently> { MainScreen() }
         }

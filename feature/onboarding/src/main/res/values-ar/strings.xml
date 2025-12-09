@@ -2,4 +2,16 @@
 <resources>
     <string name="language">اللغة</string>
     <string name="go_to_auth_screen">الذهاب إلى شاشة المصادقة</string>
+    <string name="onboarding_welcome_title">خصّص تجربتك</string>
+    <string name="onboarding_discover_title">ابحث عن فعاليات تلهمك</string>
+    <string name="onboarding_connect_title">تواصل وشارك اللحظات</string>
+    <string name="onboarding_welcome_description">اختر المظهر واللغة المفضلين لديك لتبدأ بتجربة مريحة ومصممة خصيصًا لتناسب أسلوبك.</string>
+    <string name="onboarding_discover_description">انغمس في عالم من الفعاليات المصممة لتناسب اهتماماتك الفريدة. سواء كنت تحب الموسيقى الحية، أو ورش العمل الفنية، أو التواصل المهني، أو ببساطة اكتشاف تجارب جديدة، فلدينا ما يناسب الجميع. ستساعدك توصياتنا المنسقة على الاستكشاف والتواصل والاستفادة القصوى من كل فرصة من حولك.</string>
+    <string name="onboarding_connect_description">شارك رحلتك مع الأصدقاء وابحث عن أشخاص لديهم نفس الشغف. شاهد الفعاليات التي يحضرها معارفك وانضم إلى المجتمع. Evently أفضل معًا!</string>
+    <string name="onboarding_plan_title">ابحث عن فعاليات تلهمك</string>
+    <string name="onboarding_plan_description">انغمس في عالم من الفعاليات المصممة لتناسب اهتماماتك الفريدة. سواء كنت تحب الموسيقى الحية، أو ورش العمل الفنية، أو التواصل المهني، أو ببساطة اكتشاف تجارب جديدة، فلدينا ما يناسب الجميع. ستساعدك توصياتنا المنسقة على الاستكشاف والتواصل والاستفادة القصوى من كل فرصة من حولك.</string>
+    <string name="let_s_start">هيا نبدأ</string>
+    <string name="theme">المظهر</string>
+    <string name="previous">السابق</string>
+    <string name="next">التالي</string>
 </resources>

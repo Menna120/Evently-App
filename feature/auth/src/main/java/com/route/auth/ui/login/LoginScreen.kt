@@ -59,7 +59,7 @@ fun LoginScreen(viewModel: LoginViewModel = koinViewModel()) {
             ) {
                 Text("Theme", style = MaterialTheme.typography.bodyLarge)
                 Switch(
-                    checked = darkTheme,
+                    checked = darkTheme == true,
                     onCheckedChange = viewModel::onThemeChanged
                 )
             }

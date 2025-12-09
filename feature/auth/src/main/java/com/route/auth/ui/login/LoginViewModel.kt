@@ -15,8 +15,10 @@ import com.route.auth.R
 import com.route.data.AuthManager
 import com.route.data.SettingsManager
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
@@ -28,8 +30,16 @@ class LoginViewModel(
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(LoginUiState())
     val uiState: StateFlow<LoginUiState> = _uiState.asStateFlow()
-    val appLanguage: StateFlow<String> = settingsManager.appLanguage
-    val darkTheme: StateFlow<Boolean> = settingsManager.darkTheme
+    val darkTheme: StateFlow<Boolean?> = settingsManager.darkTheme.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.Eagerly,
+        initialValue = null
+    )
+    val appLanguage: StateFlow<String?> = settingsManager.appLanguage.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.Eagerly,
+        initialValue = null
+    )
 
     fun onEmailChange(email: String) {
         _uiState.update { it.copy(email = email) }
